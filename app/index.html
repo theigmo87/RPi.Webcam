@@ -11,6 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- inject:css -->
     <!-- endinject -->
+    <style>
+      #videoCanvas {
+        /* Always stretch the canvas to 640x480, regardless of its
+        internal size. */
+        width: 640px;
+        height: 480px;
+      }
+    </style>
 </head>
 <body>
 
@@ -18,8 +26,23 @@
 
 <!-- inject:js -->
 <!-- endinject -->
-
+<canvas id="videoCanvas" width="640" height="480">
+		<p>
+			Please use a browser that supports the Canvas Element, like
+			<a href="http://www.google.com/chrome">Chrome</a>,
+			<a href="http://www.mozilla.com/firefox/">Firefox</a>,
+			<a href="http://www.apple.com/safari/">Safari</a> or Internet Explorer 10
+		</p>
+	</canvas>
 <script src="/init.js"></script>
+<script>
 
+</script>
+<script type="text/javascript">
+  // Setup the WebSocket connection and start the player
+  var client = new WebSocket( 'ws://example.com:8084/' );
+  var canvas = document.getElementById('videoCanvas');
+  var player = new jsmpeg(client, {canvas:canvas});
+</script>
 </body>
 </html>
