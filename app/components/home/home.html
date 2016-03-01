@@ -1,6 +1,12 @@
-<h1>Howdy!</h1>
-<h2>Gratz!!!!!!!</h2>
-<p>
-    Your deployment of Angular 2 Seed worked perfectly!
-    Click <a [router-link]="['/about']">here</a> to get your reward!
-</p>
+<h1>Webcam Stream</h1>
+<button type="button" [disabled]="streamingEnabled" (click)="startStream($event)">
+  Start Stream
+</button>
+<canvas id="videoCanvas" width="640" height="480" #videoCanvas>
+	<p>
+		Please use a browser that supports the Canvas Element, like
+		<a href="http://www.google.com/chrome">Chrome</a>,
+		<a href="http://www.mozilla.com/firefox/">Firefox</a>,
+		<a href="http://www.apple.com/safari/">Safari</a> or Internet Explorer 10
+	</p>
+</canvas>

@@ -19,6 +19,7 @@ import {NamesList} from './services/NameList';
     directives: [RouterOutlet, RouterLink]
 })
 class App {
+
 }
 
 
