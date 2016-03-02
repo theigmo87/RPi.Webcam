@@ -18,7 +18,7 @@ export class Home{
   client: WebSocket;
   constructor(myElement: ElementRef){
     this.canvasElement = myElement.nativeElement.querySelector("#videoCanvas");
-    this.client = new WebSocket('ws://raspberrypi.local:8084/' );
+    this.client = new WebSocket('ws://picam1.local:8084/' );
   }
   startStream(event: Event){
       //start stream
