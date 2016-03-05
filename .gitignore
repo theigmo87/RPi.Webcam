@@ -1,6 +1,9 @@
 #logs
 logs
 
+#settings
+.vscode
+
 #distrobution directories
 dist
 

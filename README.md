@@ -14,3 +14,31 @@ ffmpeg -s 320x240 -f avfoundation -i /dev/video0 -f mpeg1video \
 
 latest that works:
 ffserver -f /etc/ffserver.conf & ffmpeg -s 320x240 -f video4linux2 -v verbose -i /dev/video0 -f mpeg1video -b:v 64k http://localhost:8082/stream/webcam.ffm
+
+raspberry pi 2 - 03/05/16
+ffserver -f /etc/ffserver.conf & ffmpeg -r 5 -s 320x240 -f video4linux2 -i /dev/video0 http://localhost:8082/webcam.ffm
+
+with this in /etc/ffserver.conf
+HTTPPort 8082
+HTTPBindAddress 0.0.0.0
+MaxClients 10
+MaxBandwidth 50000
+
+<Feed webcam.ffm>
+file /tmp/webcam.ffm
+FileMaxSize 10M
+</Feed>
+
+<Stream webcam.mjpeg>
+Feed webcam.ffm
+Format mjpeg
+VideoSize 320x240
+VideoFrameRate 10
+VideoBitRate 20000
+VideoQMin 1
+VideoQMax 10
+</Stream>
+
+<Stream stat.html>
+Format status
+</Stream>
