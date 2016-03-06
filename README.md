@@ -15,6 +15,8 @@ ffmpeg -s 320x240 -f avfoundation -i /dev/video0 -f mpeg1video \
 latest that works:
 ffserver -f /etc/ffserver.conf & ffmpeg -s 320x240 -f video4linux2 -v verbose -i /dev/video0 -f mpeg1video -b:v 64k http://localhost:8082/stream/webcam.ffm
 
+ffmpeg -s 320x240 -v verbose -i /dev/video0 -c:v libvpx -f webm -b:v 512 http://jmbp.local:8082/webcam
+
 raspberry pi 2 - 03/05/16
 ffserver -f /etc/ffserver.conf & ffmpeg -r 5 -s 320x240 -f video4linux2 -i /dev/video0 http://localhost:8082/webcam.ffm
 

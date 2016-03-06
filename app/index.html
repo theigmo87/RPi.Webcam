@@ -19,6 +19,7 @@
         height: 480px;
       }
     </style>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 </head>
 <body>
 
@@ -26,7 +27,55 @@
 
 <!-- inject:js -->
 <!-- endinject -->
+<video id="v" autoplay src="http://retropie.local:8084/webcam.webm"> </video>
 
+<script>
+    window.URL = window.URL || window.webkitURL;
+    window.MediaSource = window.MediaSource || window.WebKitMediaSource;
+
+    if(!!! window.MediaSource)
+    {
+        alert('MediaSource API is not available!');
+    }
+
+    var mediaSource = new MediaSource();
+    var video = document.getElementById('v');
+
+    video.src = window.URL.createObjectURL(mediaSource);
+    /*
+    var socket = io("http://localhost:8082");
+    socket.on('data')
+    var sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vorbis,vp8"');
+    var socket = io.connect('http://localhost:8082');
+
+    if(socket)
+        console.log('Library retrieved!');
+
+    socket.emit('VIDEO_STREAM_REQ','REQUEST');
+
+    socket.on('VS', function (data)
+    {
+        console.log(data);
+        sourceBuffer.append(data);
+    });
+    */
+    mediaSource.addEventListener('sourceopen', function(e)
+    {
+        var sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vorbis,vp8"');
+        var socket = io.connect('http://localhost:8082');
+
+        if(socket)
+            console.log('Library retrieved!');
+
+        socket.emit('VIDEO_STREAM_REQ','REQUEST');
+
+        socket.on('VS', function (data)
+        {
+            console.log(data);
+            sourceBuffer.appendBuffer(data);
+        });
+    });
+</script>
 <script src="/init.js"></script>
 <script>
 

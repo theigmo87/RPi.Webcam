@@ -1,5 +1,5 @@
 ///<reference path="../../typings/jsmpeg.d.ts" />
-import streamClient = require('streamClient');
+//import streamClient = require('streamClient');
 import {Component, View, ElementRef} from 'angular2/angular2';
 import {RouterLink} from 'angular2/router';
 
@@ -12,6 +12,7 @@ import {RouterLink} from 'angular2/router';
 })
 
 export class Home{
+    /*
   canvasElement: HTMLElement;
   streamingEnabled: boolean = false;
   player: any;
@@ -25,4 +26,5 @@ export class Home{
       this.streamingEnabled = true;
       this.player = new jsmpeg(this.client, {canvas: this.canvasElement});
   }
+  */
 }
