@@ -14,14 +14,7 @@ var tsc = require('gulp-typescript');
 var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
 var insert = require('gulp-insert');
-
-
-    var sass = require('gulp-sass');
-
-
-
-
-
+var sass = require('gulp-sass');
 var Builder = require('systemjs-builder');
 var del = require('del');
 var fs = require('fs');
@@ -30,7 +23,7 @@ var join = path.join;
 var runSequence = require('run-sequence');
 var semver = require('semver');
 var series = require('stream-series');
-
+var sftp = require('gulp-sftp');
 var express = require('express');
 var serveStatic = require('serve-static');
 var openResource = require('open');
@@ -410,3 +403,14 @@ function serveSPA(env) {
         openResource('http://localhost:' + PORT + APP_BASE);
     });
 }
+
+//deploying over sftp
+gulp.task('deploy.webcamClient', function(){
+	return gulp.src(PATH.dest.dev.all + "/*")
+		.pipe(sftp({
+			host: 'picam1.local',
+			user: 'pi',
+			pass: 'raspberry',
+            remotePath: '/home/pi/Development/myapp/RPi.Webcam/dist/dev'
+		}));
+});

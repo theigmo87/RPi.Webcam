@@ -44,3 +44,6 @@ VideoQMax 10
 <Stream stat.html>
 Format status
 </Stream>
+
+
+-- ffmpeg -s 320x240 -v verbose -i /dev/video0 -c:v libvpx -f webm -b:v 512 http://jmbp.local:8084/stream01
